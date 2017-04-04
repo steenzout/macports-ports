@@ -4,7 +4,8 @@ matrix:
   fast_finish: true
 
 before_script:
-  - git fetch -v origin master
+  - git remote set-branches --add origin master
+  - git fetch
 
 script:
   - bash test.sh
