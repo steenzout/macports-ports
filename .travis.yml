@@ -1,9 +1,10 @@
 language: python
 
-
 matrix:
   fast_finish: true
 
+before_script:
+  - git fetch master
 
 script:
   - bash test.sh
