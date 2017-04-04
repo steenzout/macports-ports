@@ -1,7 +1,18 @@
 language: bash
 
+cache:
+  directories:
+    - /home/travis/terryfy
+    - /opt/local
+
 matrix:
   fast_finish: true
+  include:
+    - os: osx
+      osx_image: xcode8.3
+
+install:
+  - travis/setup.sh
 
 before_script:
   - git remote set-branches --add origin master
