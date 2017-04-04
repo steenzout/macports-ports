@@ -1,10 +1,9 @@
-language: bash
+language: python
+python: 2.7
 sudo: yes
 
-cache:
-  directories:
-    - /home/travis/terryfy
-    - /opt/local
+os:
+  - osx
 
 matrix:
   fast_finish: true
@@ -12,12 +11,19 @@ matrix:
     - os: osx
       osx_image: xcode8.3
 
+cache:
+  directories:
+    - "${HOME}/.pip"
+
+before_cache:
+  - "find ${HOME}/.pip -name log -o -name __pycache__ -type d | xargs -I {} rm -rf {}"
+
 install:
-  - travis-ci/setup.sh
+  - ansible-playbook travis-ci/setup.sh
 
 before_script:
   - git remote set-branches --add origin master
   - git fetch
 
 script:
-  - bash test.sh
+  - bash travis-ci/test.sh

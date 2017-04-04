@@ -1,23 +1,9 @@
 #!/bin/bash
 
-ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+dir_source="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-git clone --depth 1 https://github.com/MacPython/terryfy.git
+pip install ansible=2.1
 
-source terryfy/travis_tools.sh
+ansible-galaxy install --force -r "${dir_source}/requirements.yml"
 
-MACPORTS_VERSION=2.4.1
-
-func setup {
-    local osx_version=$(get_osx_version)
-    local vers_name=$(osx_version2version_name $osx_version)
-    local macports_pkg=MacPorts-$MACPORTS_VERSION-${vers_name}.pkg
-    local macports_path=$DOWNLOADS_SDIR/$macports_pkg
-
-    mkdir -p $DOWNLOADS_SDIR
-    curl -L $MACPORTS_URL/$macports_pkg > $macports_path
-    require_success "failed to download macports"
-    sudo installer -pkg $macports_path -target /
-    require_success "failed to install macports"
-    PATH=$MACPORTS_PREFIX/bin:$PATH
-}
+ansible-playbook -i localhost, --connection=local "${dir_source}/setup.yml"
