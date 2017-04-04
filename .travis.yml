@@ -12,7 +12,7 @@ matrix:
       osx_image: xcode8.3
 
 install:
-  - travis/setup.sh
+  - travis-ci/setup.sh
 
 before_script:
   - git remote set-branches --add origin master
