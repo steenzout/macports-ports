@@ -4,7 +4,7 @@ matrix:
   fast_finish: true
 
 before_script:
-  - git fetch -v
+  - git fetch -v origin master
 
 script:
   - bash test.sh
