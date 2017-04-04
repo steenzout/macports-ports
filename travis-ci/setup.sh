@@ -2,7 +2,7 @@
 
 ssh-keyscan -H github.com >> ~/.ssh/known_hosts
 
-git clone --depth 1 git@github.com:MacPython/terryfy.git
+git clone --depth 1 https://github.com/MacPython/terryfy.git
 
 source terryfy/travis_tools.sh
 
