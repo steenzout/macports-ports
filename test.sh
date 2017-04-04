@@ -11,7 +11,7 @@ git --version
 
 git diff --help
 
-for portfile in `git diff --name-status master..HEAD | grep Portfile | awk '{ print $2 }'`; do
+for portfile in `git diff --name-status master HEAD | grep Portfile | awk '{ print $2 }'`; do
 
     dir_port=`dirname ${portfile}`
 
